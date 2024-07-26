@@ -138,7 +138,7 @@ rails generate devise:views
     
     ```
 
-### ntegrate OpenAI
+### Integrate OpenAI
 
 1. **Add the `ruby-openai` gem to your Gemfile:**
     
