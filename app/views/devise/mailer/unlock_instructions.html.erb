@@ -1,0 +1,28 @@
+<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">
+  <style>
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      text-decoration: none;
+      border-radius: 0.375rem;
+    }
+    .button:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  </style>
+
+  <p style="font-size: 16px; font-weight: bold; margin-top: 0; margin-bottom: 1rem;">Hello <%= @resource.email %>!</p>
+
+  <p style="margin-top: 0; margin-bottom: 1rem;">Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+
+  <p style="margin-top: 0; margin-bottom: 1rem;">Click the link below to unlock your account:</p>
+
+  <p style="margin-top: 0; margin-bottom: 1rem;">
+    <%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token), class: "button", style: "display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 0.375rem;" %>
+  </p>
+</div>
+
