@@ -52,7 +52,7 @@ class NotesController < ApplicationController
 
   def enhance_content(note)
     begin
-      client = OpenAI::Client.new
+      client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
       response = client.chat(
         parameters: {
           model: "gpt-3.5-turbo",
@@ -60,14 +60,14 @@ class NotesController < ApplicationController
           max_tokens: 100
         }
       )
-
+  
       if response && response['choices'] && response['choices'][0]
         note.update(enhanced_content: response['choices'][0]['message']['content'])
       else
         note.update(enhanced_content: "Error enhancing content")
       end
     rescue => e
-      note.update(enhanced_content: "Error enhancing content")
+      note.update(enhanced_content: "Error enhancing content: #{e.message}")
     end
   end
 end
