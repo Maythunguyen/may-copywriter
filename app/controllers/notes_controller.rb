@@ -19,7 +19,7 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.build(note_params)
     if @note.save
-      enhance_content(@note)
+      NoteEnhancer.enhance(@note)
       redirect_to @note, notice: 'Note was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      enhance_content(@note)
+      NoteEnhancer.enhance(@note)
       redirect_to @note, notice: 'Note was successfully updated.'
     else
       render :edit
@@ -46,28 +46,8 @@ class NotesController < ApplicationController
     @note = current_user.notes.find(params[:id])
   end
 
+
   def note_params
     params.require(:note).permit(:content, :enhanced_content)
-  end
-
-  def enhance_content(note)
-    begin
-      client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-      response = client.chat(
-        parameters: {
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: note.content.to_plain_text }],
-          max_tokens: 100
-        }
-      )
-  
-      if response && response['choices'] && response['choices'][0]
-        note.update(enhanced_content: response['choices'][0]['message']['content'])
-      else
-        note.update(enhanced_content: "Error enhancing content")
-      end
-    rescue => e
-      note.update(enhanced_content: "Error enhancing content: #{e.message}")
-    end
   end
 end
