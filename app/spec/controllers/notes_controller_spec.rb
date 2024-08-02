@@ -1,4 +1,3 @@
-# spec/controllers/notes_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe NotesController, type: :controller do
