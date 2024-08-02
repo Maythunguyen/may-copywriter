@@ -16,13 +16,6 @@
 
   <body>
     <%= yield %>
-    <div class="logout-link">
-      <% if user_signed_in? %>
-        <div class="fixed top-4 right-4 sm:top-5 sm:right-5 md:top-8 md:right-8 lg:top-10 lg:right-10 z-50">
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "inline-block px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 bg-white text-black border-2 border-black-stroke font-semibold rounded-xl hover:bg-custom-button no-underline" %>
-        </div>
-      <% end %>
-    </div>
     <%= javascript_include_tag "gsap_animation" %>
     <%= javascript_include_tag "modal" %>
   </body>
