@@ -6,7 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load if defined?(Dotenv::Railtie)
+# Use Dotenv::Rails instead of Dotenv::Railtie
+Dotenv::Rails.load if defined?(Dotenv::Rails)
 
 module CopywriterApp2
   class Application < Rails::Application
